@@ -1,0 +1,1 @@
+let e=0;const l=document.querySelectorAll(".slides li"),i=l.length;function n(s){l.forEach((t,c)=>{t.classList.remove("active"),c===s&&t.classList.add("active")})}function o(){e=(e+1)%i,n(e)}setInterval(o,3e3);
