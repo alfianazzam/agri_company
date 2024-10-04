@@ -1,21 +1,7 @@
+import './bootstrap';
 
-// Automatic slider functionality
-let currentIndex = 0;
-const slides = document.querySelectorAll('.slides li');
-const totalSlides = slides.length;
+import Alpine from 'alpinejs';
 
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) {
-            slide.classList.add('active');
-        }
-    });
-}
+window.Alpine = Alpine;
 
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalSlides; // Loop back to the first slide
-    showSlide(currentIndex);
-}
-
-setInterval(nextSlide, 3000); // Change slide every 3 seconds
+Alpine.start();

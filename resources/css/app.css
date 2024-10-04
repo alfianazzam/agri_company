@@ -1,12 +1,3 @@
-/* jumbotron slider */
-.slides li {
-    display: none;
-    /* Hide all slides initially */
-    transition: opacity 0.5s ease;
-    /* Add a transition effect */
-}
-
-.slides li.active {
-    display: block;
-    /* Show only the active slide */
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

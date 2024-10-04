@@ -64,8 +64,7 @@
             <div class="loader">Loading...</div>
         </div>
 
-        {{-- Navbar secntion --}}
-        @include('components/navbar/index')
+       @include('components.navbar.index')
 
         {{-- Jumbotron, if it's only for the landing page, check with a condition --}}
         @if (Request::is('/'))
