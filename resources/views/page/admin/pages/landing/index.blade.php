@@ -1,8 +1,8 @@
-            @extends('layouts.admin')
+@extends('layouts.admin')
 
-            @section('title', 'Page Landing')
+@section('title', 'Page Landing')
 
-            @section('content')
+@section('content')
 
 <main>
     <div class="container-fluid px-4">
@@ -13,85 +13,195 @@
 
         <!-- 1. Jumbotron -->
         <div class="card mb-4">
+
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span>
-                    <i class="fas fa-image me-1"></i>
-                    Jumbotron
-                </span>
-                <button class="btn btn-danger btn-sm" onclick="deleteSelected('jumbotron')">Delete Selected</button>
+                <h5><i class="fas fa-image me-1"></i> Add Jumbotron</h5>
             </div>
             <div class="card-body">
-                <form>
+                <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="jumbotronTitle" class="form-label">Title</label>
-                        <input class="form-control" type="text" id="jumbotronTitle" value="Jumbotron Title">
+                        <input class="form-control" type="text" name="title" id="jumbotronTitle" placeholder="Jumbotron Title">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="subTitle" class="form-label">Subtitle</label>
+                        <input class="form-control" type="text" name="subtitle" id="subTitle" placeholder="Sub Title">
+                    </div>
+
                     <div class="mb-3">
                         <label for="jumbotronImage" class="form-label">Upload Image</label>
-                        <input class="form-control" type="file" id="jumbotronImage" onchange="previewImage(event, 'jumbotronPreview')">
+                        <input class="form-control" type="file" name="image_url" id="jumbotronImage">
                     </div>
-                    <div id="jumbotronPreview" class="preview-container mb-3">
-                        <h5>Preview:</h5>
-                        <img src="" alt="Preview" style="max-width: 100%; height: auto; display: none;" />
-                    </div>
-                    <button type="button" class="btn btn-success" onclick="addJumbotron()">Add</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+
+                    <button type="submit" class="btn btn-success">Add Jumbotron</button>
                 </form>
-                <hr>
-                <h5>Existing Jumbotron Items:</h5>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="jumbotron1" id="jumbotron1">
-                    <label class="form-check-label" for="jumbotron1">Existing Jumbotron 1</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="jumbotron2" id="jumbotron2">
-                    <label class="form-check-label" for="jumbotron2">Existing Jumbotron 2</label>
-                </div>
             </div>
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-list me-1 mx-3"></i> Existing Jumbotron Items</h5>
+                <button id="toggle-jumbos" class="btn btn-secondary btn-sm">Hide</button>
+            </div>
+            <div id="existing-jumbos" class="card-body">
+                @if($jumbos->isEmpty())
+                    <p class="text-muted">No Jumbotron items available.</p>
+                @else
+                    @foreach($jumbos as $jumbo)
+                        <div class="form-check mb-3 p-3 border rounded shadow-sm d-flex align-items-center" style="background-color: #f9f9f9;">
+                            <div class="w-100">
+                                <form action="{{ route('update', $jumbo->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="mb-3">
+                                        <label for="jumbotronTitle{{ $jumbo->id }}" class="form-label">Title</label>
+                                        <input class="form-control form-control-sm" type="text" name="title" id="jumbotronTitle{{ $jumbo->id }}" value="{{ $jumbo->title }}">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="jumbotronSubtitle{{ $jumbo->id }}" class="form-label">Subtitle</label>
+                                        <input class="form-control form-control-sm" type="text" name="subtitle" id="jumbotronSubtitle{{ $jumbo->id }}" value="{{ $jumbo->subtitle }}">
+                                    </div>
+
+                                    <div class="mb-3 text-center">
+                                        <img src="{{ asset('storage/' . $jumbo->image_url) }}" alt="Jumbotron Image" class="img-fluid rounded" style="max-width: 150px; height: auto; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="jumbotronImageReplace" class="form-label">Ganti Jumbotron</label>
+                                        <input class="form-control" type="file" name="image_url" id="jumbotronImageReplace">
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                    </div>
+                                </form>
+
+                                <form action="{{ route('delete', $jumbo->id) }}" method="POST" class="mt-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        <!-- JavaScript untuk Hide/Show Existing Jumbotron -->
+        <script>
+            document.getElementById('toggle-jumbos').addEventListener('click', function () {
+                var existingJumbos = document.getElementById('existing-jumbos');
+                if (existingJumbos.style.display === 'none' || existingJumbos.style.display === '') {
+                    existingJumbos.style.display = 'block';
+                    this.textContent = 'Hide'; // Ubah teks tombol ke 'Hide'
+                } else {
+                    existingJumbos.style.display = 'none';
+                    this.textContent = 'Show'; // Ubah teks tombol ke 'Show'
+                }
+            });
+        </script>
         </div>
 
-        <!-- 2. About Us -->
-        <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span>
-                    <i class="fas fa-info-circle me-1"></i>
-                    About Us
-                </span>
-                <button class="btn btn-danger btn-sm" onclick="deleteSelected('about')">Delete Selected</button>
-            </div>
-            <div class="card-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="aboutTitle" class="form-label">Title</label>
-                        <input class="form-control" type="text" id="aboutTitle" value="About Us Title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="aboutImage" class="form-label">About Image</label>
-                        <input class="form-control" type="file" id="aboutImage" onchange="previewImage(event, 'aboutPreview')">
-                    </div>
-                    <div id="aboutPreview" class="preview-container mb-3">
-                        <h5>Preview:</h5>
-                        <img src="" alt="Preview" style="max-width: 100%; height: auto; display: none;" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="aboutText" class="form-label">About Text</label>
-                        <textarea class="form-control" id="aboutText" rows="3">About us description here...</textarea>
-                    </div>
-                    <button type="button" class="btn btn-success" onclick="addAboutUs()">Add</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-                <hr>
-                <h5>Existing About Us Items:</h5>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="about1" id="about1">
-                    <label class="form-check-label" for="about1">Existing About Us 1</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="about2" id="about2">
-                    <label class="form-check-label" for="about2">Existing About Us 2</label>
-                </div>
-            </div>
+<!-- 2. About Us -->
+<div class="card mb-4">
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Header Section -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5><i class="fas fa-info-circle me-1"></i> About Us</h5>
+    </div>
+
+    <div class="card-body">
+        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- Title Input -->
+            <div class="mb-3">
+                <label for="aboutUsTitle" class="form-label"><i class="fas fa-heading me-1"></i> Title</label>
+                <input class="form-control" type="text" name="title" id="aboutUsTitle" placeholder="Enter title..." required value="{{ old('title', $about->title ?? '') }}">
+            </div>
+
+            <!-- Subtitle Input -->
+            <div class="mb-3">
+                <label for="aboutUsSubtitle" class="form-label"><i class="fas fa-subscript me-1"></i> Subtitle</label>
+                <input class="form-control" type="text" name="subtitle" id="aboutUsSubtitle" placeholder="Enter subtitle..." value="{{ old('subtitle', $about->subtitle ?? '') }}">
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label for="aboutUsImage" class="form-label"><i class="fas fa-upload me-1"></i> Upload Image</label>
+                <input class="form-control" type="file" name="image_url" id="aboutUsImage">
+            </div>
+
+            <!-- Description Textarea -->
+            <div class="mb-3">
+                <label for="aboutUsText" class="form-label"><i class="fas fa-align-left me-1"></i> Description</label>
+                <textarea class="form-control" name="text" id="aboutUsText" rows="5" placeholder="Write description..." required>{{ old('text', $about->text ?? '') }}</textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Save About Us
+            </button>
+        </form>
+
+        <!-- Preview Section -->
+        @if(isset($about))
+            <div class="mt-4">
+                <h2>Preview</h2>
+                <h3>{{ $about->title }}</h3>
+                @if($about->image_url)
+                    <img src="{{ asset('storage/' . $about->image_url) }}" alt="About Us Image" class="img-fluid rounded mb-3" style="max-width: 150px; height: auto; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                @endif
+                <h4 class="fw-normal">{{ $about->subtitle }}</h4>
+                <p>{!! $about->text !!}</p>
+                
+                <!-- Delete Button -->
+                <form action="{{ route('delete', $about->id) }}" method="POST" class="mt-3">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i> Delete About Us
+                    </button>
+                </form>
+            </div>
+        @endif
+    </div>
+</div>
 
         <!-- 3. Our Works -->
         <div class="card mb-4">
@@ -170,7 +280,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="articleText" class="form-label">Article Text</label>
-                        <textarea class="form-control" id="articleText" rows="3">Article description here...</textarea>
+                        <textarea class="form-control" id="articleText" rows="3">Content of the article goes here...</textarea>
                     </div>
                     <button type="button" class="btn btn-success" onclick="addArticle()">Add</button>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -200,8 +310,12 @@
             <div class="card-body">
                 <form>
                     <div class="mb-3">
-                        <label for="teamTitle" class="form-label">Team Title</label>
-                        <input class="form-control" type="text" id="teamTitle" value="Team Title Here">
+                        <label for="teamName" class="form-label">Team Member Name</label>
+                        <input class="form-control" type="text" id="teamName" value="Team Member Name Here">
+                    </div>
+                    <div class="mb-3">
+                        <label for="teamRole" class="form-label">Role</label>
+                        <input class="form-control" type="text" id="teamRole" value="Role Here">
                     </div>
                     <div class="mb-3">
                         <label for="teamImage" class="form-label">Team Image</label>
@@ -211,22 +325,18 @@
                         <h5>Preview:</h5>
                         <img src="" alt="Preview" style="max-width: 100%; height: auto; display: none;" />
                     </div>
-                    <div class="mb-3">
-                        <label for="teamDescription" class="form-label">Team Description</label>
-                        <textarea class="form-control" id="teamDescription" rows="3">Team description here...</textarea>
-                    </div>
-                    <button type="button" class="btn btn-success" onclick="addTeam()">Add</button>
+                    <button type="button" class="btn btn-success" onclick="addTeamMember()">Add</button>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
                 <hr>
-                <h5>Existing Team Items:</h5>
+                <h5>Existing Team Members:</h5>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="team1" id="team1">
-                    <label class="form-check-label" for="team1">Existing Team 1</label>
+                    <label class="form-check-label" for="team1">Existing Team Member 1</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="team2" id="team2">
-                    <label class="form-check-label" for="team2">Existing Team 2</label>
+                    <label class="form-check-label" for="team2">Existing Team Member 2</label>
                 </div>
             </div>
         </div>
@@ -243,18 +353,14 @@
             <div class="card-body">
                 <form>
                     <div class="mb-3">
-                        <label for="questionTitle" class="form-label">Question Title</label>
-                        <input class="form-control" type="text" id="questionTitle" value="Question Title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="questionAnswer" class="form-label">Answer</label>
-                        <textarea class="form-control" id="questionAnswer" rows="3">Answer to the question here...</textarea>
+                        <label for="questionText" class="form-label">Question</label>
+                        <input class="form-control" type="text" id="questionText" value="Question Here">
                     </div>
                     <button type="button" class="btn btn-success" onclick="addQuestion()">Add</button>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
                 <hr>
-                <h5>Existing Question Items:</h5>
+                <h5>Existing Questions:</h5>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="question1" id="question1">
                     <label class="form-check-label" for="question1">Existing Question 1</label>
@@ -265,39 +371,9 @@
                 </div>
             </div>
         </div>
+
     </div>
 </main>
 
-<script>
-    function previewImage(event, previewId) {
-        const previewContainer = document.getElementById(previewId);
-        const imgElement = previewContainer.querySelector('img');
-        const file = event.target.files[0];
-        
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imgElement.src = e.target.result;
-                imgElement.style.display = 'block'; // Show the image
-            }
-            reader.readAsDataURL(file);
-        } else {
-            imgElement.src = '';
-            imgElement.style.display = 'none'; // Hide the image
-        }
-    }
+@endsection
 
-    function deleteSelected(section) {
-        const checkboxes = document.querySelectorAll(`input[type="checkbox"][value^="${section}"]`);
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                // Logic for deleting selected items
-                console.log(`Deleting ${checkbox.value}`);
-                checkbox.closest('.form-check').remove(); // Remove the checkbox from the DOM
-            }
-        });
-    }
-</script>
-
-
-            @endsection

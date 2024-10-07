@@ -1,13 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Login Page'
+@section('title', '404 Not Found')
 
 @section('content')
-<main>
-      <div class="page-loader">
-        <div class="loader">Loading...</div>
-      </div>
-      <section class="home-section home-parallax home-fade home-full-height bg-dark bg-dark-30" id="home" data-background="assets/images/section-4.jpg">
+    <main>  
+      <section class="home-section home-parallax home-fade home-full-height bg-dark bg-dark-30" id="home" data-background="{{ asset('assets/images/section-4.jpg') }}">
         <div class="titan-caption">
           <div class="caption-content">
             <div class="font-alt mb-30 titan-title-size-4">Error 404</div>
@@ -18,4 +15,4 @@
         </div>
       </section>
     </main>
-    @endsection
+@endsection

@@ -9,24 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
-{
-    Schema::create('users', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('email')->unique();
-        $table->timestamp('email_verified_at')->nullable();
-        $table->string('password');
-        $table->rememberToken();
-        $table->timestamps();
-    });
-}
-
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id(); // Primary key
+            $table->string('name'); // Nama pengguna
+            $table->string('username')->unique(); // Username unik
+            $table->string('email')->unique(); // Email unik
+            $table->string('password'); // Password
+            $table->string('role')->default('user'); // Peran pengguna dengan default 'user'
+            $table->timestamp('email_verified_at')->nullable(); // Tanggal verifikasi email
+            $table->rememberToken(); // Token untuk fitur "remember me"
+            $table->timestamps(); // Kolom created_at dan updated_at
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('users');
     }

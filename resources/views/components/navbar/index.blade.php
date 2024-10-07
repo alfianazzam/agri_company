@@ -1,4 +1,4 @@
-<nav class="navbar navbar-custom navbar-fixed-top   " role="navigation">
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
@@ -7,13 +7,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Agro Kreatif</a>
+            <a class="navbar-brand" href="{{ url('/') }}">Agro Kreatif</a>
         </div>
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Beranda</a></li>
-
-                <li class="dropdown">
+                <li>
+                    <a href="{{ url('/') }}" 
+                        style="{{ Request::is('/') ? 'color: white;' : '' }}">
+                        Beranda
+                    </a>
+                </li>
+                             <li class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Tentang kami</a>
                     <ul class="dropdown-menu">
                         <li class="dropdown">
@@ -183,26 +187,46 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Article</a>
                     <ul class="dropdown-menu">
-                        <li><a href="blog_standard_left_sidebar.html">Left Sidebar</a></li>
-                        <li><a href="blog_standard_right_sidebar.html">Right Sidebar</a></li>
-                        <li><a href="blog_standard_no_sidebar.html">No Sidebar</a></li>
-                        <li><a href="blog_grid_col_2.html">Grid 2 Columns</a></li>
-                        <li><a href="blog_grid_col_3.html">Grid 3 Columns</a></li>
-                        <li><a href="blog_grid_col_4.html">Grid 4 Columns</a></li>
+                        <li><a href="/poster">Poster</a></li>
                     </ul>
                 </li>
+                    <!-- Tambahkan item navigasi lain di sini -->
+                    <!-- User authentication menu -->
+                    @if (Auth::check())
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li class="dropdown-item p-2">
+                                    <a class="mb-0">Welcome, {{ Auth::user()->name }}</a>
+                                </li>
+                                <li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        @if (request()->hasCookie('user_email'))
+                            {{ response()->withoutCookie('user_email') }}
+                        @endif
+                        <li>
+                            <a class="btn" href="{{ url('/register') }}" 
+                            style="{{ Request::is('register') ? 'color: white;' : '' }}">
+                            Sign Up
+                            </a>
+                        </li>
+                    @endif
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>
 
-                <!-- Sign Up Button -->
-                <li>
-                    <a class="btn" href="/register" type="submit">Sign up</a>
-                </li>
 
-                <!-- Search Icon -->
-                <li>
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

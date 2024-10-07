@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+        'checkAuth' => \App\Http\Middleware\checkAuth::class, // middleware untuk pengecekan admin
+        'guest' => \App\Http\Middleware\PreventLoggedInUserAccess::class, // middleware untuk tamu
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
