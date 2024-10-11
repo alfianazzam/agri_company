@@ -40,7 +40,7 @@
                 <h5><i class="fas fa-image me-1"></i> Add Jumbotron</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('jumbotron.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="jumbotronTitle" class="form-label">Title</label>
@@ -72,7 +72,7 @@
                     @foreach($jumbos as $jumbo)
                         <div class="form-check mb-3 p-3 border rounded shadow-sm d-flex align-items-center" style="background-color: #f9f9f9;">
                             <div class="w-100">
-                                <form action="{{ route('update', $jumbo->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('jumbotron.update', $jumbo->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
@@ -100,7 +100,7 @@
                                     </div>
                                 </form>
 
-                                <form action="{{ route('delete', $jumbo->id) }}" method="POST" class="mt-2">
+                                <form action="{{ route('jumbotron.delete', $jumbo->id) }}" method="POST" class="mt-2">
                                     @csrf
                                     @method('DELETE')
                                     <div class="text-center">

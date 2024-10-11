@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('posters', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi dengan tabel users
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Relasi dengan tabel categories
             $table->string('title'); // Judul poster
             $table->text('content'); // Konten poster
-            $table->string('img_url'); // URL gambar
+            $table->string('img_url')->nullable(); // URL gambar
             $table->timestamps(); // Kolom created_at dan updated_at
         });
     }

@@ -21,7 +21,7 @@ class AboutController extends Controller
         return view('components.about.live', [
             'showHeader' => false,
             'showFooter' => false,
-            'about' => $about,
+            'about' => $about
         ]);
     }
 

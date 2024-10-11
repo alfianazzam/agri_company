@@ -90,9 +90,6 @@
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Gallery</a>
                             <ul class="dropdown-menu">
                                 <li><a href="gallery_col_2.html">2 Columns</a></li>
-                                <li><a href="gallery_col_3.html">3 Columns</a></li>
-                                <li><a href="gallery_col_4.html">4 Columns</a></li>
-                                <li><a href="gallery_col_6.html">6 Columns</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -119,67 +116,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Gallery</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Boxed</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio_boxed_col_2.html">2 Columns</a></li>
-                                <li><a href="portfolio_boxed_col_3.html">3 Columns</a></li>
-                                <li><a href="portfolio_boxed_col_4.html">4 Columns</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Boxed - Gutter</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio_boxed_gutter_col_2.html">2 Columns</a></li>
-                                <li><a href="portfolio_boxed_gutter_col_3.html">3 Columns</a></li>
-                                <li><a href="portfolio_boxed_gutter_col_4.html">4 Columns</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Full Width</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio_full_width_col_2.html">2 Columns</a></li>
-                                <li><a href="portfolio_full_width_col_3.html">3 Columns</a></li>
-                                <li><a href="portfolio_full_width_col_4.html">4 Columns</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Full Width - Gutter</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio_full_width_gutter_col_2.html">2 Columns</a></li>
-                                <li><a href="portfolio_full_width_gutter_col_3.html">3 Columns</a></li>
-                                <li><a href="portfolio_full_width_gutter_col_4.html">4 Columns</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Masonry</a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Boxed</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="portfolio_masonry_boxed_col_2.html">2 Columns</a></li>
-                                        <li><a href="portfolio_masonry_boxed_col_3.html">3 Columns</a></li>
-                                        <li><a href="portfolio_masonry_boxed_col_4.html">4 Columns</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Full Width</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="portfolio_masonry_full_width_col_2.html">2 Columns</a></li>
-                                        <li><a href="portfolio_masonry_full_width_col_3.html">3 Columns</a></li>
-                                        <li><a href="portfolio_masonry_full_width_col_4.html">4 Columns</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Single</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio_single_featured_image1.html">Featured Image Style 1</a></li>
-                                <li><a href="portfolio_single_featured_image2.html">Featured Image Style 2</a></li>
-                                <li><a href="portfolio_single_featured_slider1.html">Featured Slider Style 1</a></li>
-                                <li><a href="portfolio_single_featured_slider2.html">Featured Slider Style 2</a></li>
-                            </ul>
+                        <li>
+                            <a href="/gallery">Galleries</a>
                         </li>
                     </ul>
                 </li>
@@ -192,7 +130,7 @@
                 </li>
                     <!-- Tambahkan item navigasi lain di sini -->
                     <!-- User authentication menu -->
-                    @if (Auth::check())
+                        @if (Auth::check())
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
@@ -211,15 +149,15 @@
                         </li>
                     @else
                         @if (request()->hasCookie('user_email'))
-                            {{ response()->withoutCookie('user_email') }}
+                            {{ Cookie::queue(Cookie::forget('user_email')) }}
                         @endif
                         <li>
-                            <a class="btn" href="{{ url('/register') }}" 
-                            style="{{ Request::is('register') ? 'color: white;' : '' }}">
-                            Sign Up
+                            <a class="btn" href="{{ url('/register') }}" style="{{ Request::is('register') ? 'color: white;' : '' }}">
+                                Sign Up
                             </a>
                         </li>
                     @endif
+
                     <li>
                         <a class="nav-link" href="#">
                             <i class="fa fa-search"></i>

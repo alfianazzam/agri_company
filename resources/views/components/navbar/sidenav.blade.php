@@ -15,8 +15,8 @@
 
                 <div class="sb-sidenav-menu-heading">Content Management</div>
                 <a class="nav-link collapsed {{ request()->is('/admin') ? '' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    Pages
+                    <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                    Components
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
 
@@ -38,8 +38,8 @@
                 </div>
 
                 <a class="nav-link collapsed {{ request()->is('admin/services') ? '' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseServices" aria-expanded="false" aria-controls="collapseServices">
-                    <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
-                    Services
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Pages
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
 
@@ -49,13 +49,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
                             Poster
                         </a>
+                        <a class="nav-link {{ request()->is('gallery.admin') ? 'active' : '' }}" href="{{ route('gallery.admin') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-image me-1"></i></div> <!-- Ikon gambar untuk Galeri -->
+                            Gallery
+                        </a>
                         {{-- <a class="nav-link {{ request()->is('admin/agenda') ? 'active' : '' }}"">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt me-1"></i></div> <!-- Ganti ikon dengan kalender untuk Agenda -->
                             Agenda
-                        </a>
-                        <a class="nav-link {{ request()->is('admin/gallery') ? 'active' : '' }}"">
-                            <div class="sb-nav-link-icon"><i class="fas fa-image me-1"></i></div> <!-- Ikon gambar untuk Galeri -->
-                            Gallery
                         </a> --}}
                     </nav>
                 </div>

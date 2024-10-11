@@ -8,10 +8,13 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JumbotronController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PosterController;
+use App\Http\Controllers\GalleryController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
-Route::get('/poster', [PosterController::class, 'index'])->name('poster');
+Route::get('/poster', [LandingController::class, 'poster'])->name('poster');
+Route::get('/poster/{id}', [PosterController::class, 'index'])->name('poster.detail');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 // Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 // Route::get('/proyek', [ProjectController::class, 'index'])->name('project');
@@ -41,21 +44,29 @@ Route::middleware(['checkAuth'])->group(function () {
     // Jumbotron crud
     Route::get('/admin/jumbotron', [JumbotronController::class, 'index'])->name('jumbotron');
     Route::get('/admin/jumbotron/show', [JumbotronController::class, 'show'])->name('jumbotron.show');
-    Route::post('/admin/jumbotron/store', [JumbotronController::class, 'store'])->name('store');
-    Route::put('/admin/jumbotron/update/{id}', [JumbotronController::class, 'update'])->name('update');
-    Route::delete('/admin/jumbotron/delete/{id}', [JumbotronController::class, 'delete'])->name('delete');
+    Route::post('/admin/jumbotron/store', [JumbotronController::class, 'store'])->name('jumbotron.store');
+    Route::put('/admin/jumbotron/update/{id}', [JumbotronController::class, 'update'])->name('jumbotron.update');
+    Route::delete('/admin/jumbotron/delete/{id}', [JumbotronController::class, 'delete'])->name('jumbotron.delete');
 
     // About crud
     Route::get('/admin/about', [AboutController::class, 'index'])->name('about');
     Route::get('/admin/about/show', [AboutController::class, 'show'])->name('about.show');
-    Route::post('/admin/about/store', [AboutController::class, 'store'])->name('store');
-    Route::delete('/admin/about/delete/{id}', [AboutController::class, 'delete'])->name('delete');
+    Route::post('/admin/about/store', [AboutController::class, 'store'])->name('about.store');
+    Route::delete('/admin/about/delete/{id}', [AboutController::class, 'delete'])->name('about.delete');
 
     // Poster crud
     Route::get('/admin/poster', [PosterController::class, 'admin'])->name('poster.admin');
-    Route::get('/admin/poster/show', [PosterController::class, 'show'])->name('poster.show');
-    Route::post('/admin/poster/store', [PosterController::class, 'store'])->name('store');
-    Route::delete('/admin/poster/delete/{id}', [PosterController::class, 'delete'])->name('delete');
+    Route::get('/admin/poster/show/{id}', [PosterController::class, 'show'])->name('poster.show');
+    Route::post('/admin/poster/store', [PosterController::class, 'store'])->name('poster.store');
+    Route::post('/admin/poster/update/{id}', [PosterController::class, 'update'])->name('poster.update');
+    Route::delete('/admin/poster/delete/{id}', [PosterController::class, 'delete'])->name('poster.delete');
+    
+    // Gallery crud
+    Route::get('/admin/gallery', [GalleryController::class, 'admin'])->name('gallery.admin');
+    Route::get('/admin/gallery/show', [GalleryController::class, 'show'])->name('gallery.show');
+    Route::post('/admin/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::post('/admin/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/admin/gallery/delete/{id}', [GalleryController::class, 'delete'])->name('gallery.delete');
 
 
 });

@@ -41,7 +41,7 @@
             </div>
 
             <div class="card-body p-4">
-                <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Title Input -->
@@ -88,7 +88,7 @@
                         <p class="mt-4">{!! $about->text !!}</p>
 
                         <!-- Delete Button -->
-                        <form action="{{ route('delete', $about->id) }}" method="POST" class="mt-3">
+                        <form action="{{ route('about.delete', $about->id) }}" method="POST" class="mt-3">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">

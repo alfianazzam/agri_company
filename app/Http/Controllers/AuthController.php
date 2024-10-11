@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-   public function register(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:50',
@@ -37,34 +37,31 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Hapus cookie 'user_email' jika ada
-        if ($request->hasCookie('user_email')) {
-            return redirect()->route('login')->withoutCookie('user_email'); // Remove the cookie
-        }
-
         // Mencari pengguna berdasarkan email atau username
         $user = User::where('email', $request->identifier)
                     ->orWhere('username', $request->identifier)
                     ->first();
 
-        // Cek apakah pengguna ditemukan dan mencocokkan password
+        // Cek apakah pengguna ditemukan dan password cocok
         if ($user && Hash::check($request->password, $user->password)) {
-            // Melakukan autentikasi
+            // Autentikasi pengguna
             Auth::login($user);
 
-            // Set cookie dengan email pengguna
-            return redirect()->route('home')
-                ->withCookie(cookie('user_email', $user->email, 60 * 24 * 30)); // Cookie valid untuk 30 hari
+            // Set cookie dengan email pengguna, valid 10 menit
+            return redirect()->route('home')->withCookie(cookie('user_email', $user->email, 10));
         }
 
-        throw ValidationException::withMessages([
-            'identifier' => ['The provided credentials are incorrect.'],
+        // Jika pengguna tidak ditemukan atau password salah, hapus cookie 'user_email'
+        return redirect()->route('login')->withCookie(cookie()->forget('user_email'))->withErrors([
+            'identifier' => 'The provided credentials are incorrect.',
         ]);
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('login')->withoutCookie('user_email'); // Remove the cookie
+        return redirect()->route('login')->withCookie(cookie()->forget('user_email')); // Hapus cookie pada logout
     }
+
+
 }
