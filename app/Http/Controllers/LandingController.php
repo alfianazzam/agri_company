@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Jumbotron; // Make sure to include your Jumbotron model
-use App\Models\AboutUs; // Make sure to include your Jumbotron model
-use App\Models\Poster; // Make sure to include your Jumbotron model
+use App\Models\Jumbotron;
+use App\Models\AboutUs;
+use App\Models\Poster;
+use App\Models\Agenda;
 
 class LandingController extends Controller
 {
@@ -32,6 +33,12 @@ class LandingController extends Controller
         $posters = Poster::with('user')->paginate(8); 
         // Mengirim variabel 'posters' ke view
         return view('page.landing.pages.posters.index', compact('posters')); 
+    }
+
+    public function agenda()
+    {
+        $agendas = Agenda::orderBy('date', 'desc')->get();
+        return view('page.landing.pages.agenda.index', compact('agendas'));
     }
 
 

@@ -53,10 +53,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-image me-1"></i></div> <!-- Ikon gambar untuk Galeri -->
                             Gallery
                         </a>
-                        {{-- <a class="nav-link {{ request()->is('admin/agenda') ? 'active' : '' }}"">
+                        <a class="nav-link {{ request()->is('agenda.admin') ? 'active' : '' }}" href="{{ route('agenda.admin') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt me-1"></i></div> <!-- Ganti ikon dengan kalender untuk Agenda -->
                             Agenda
-                        </a> --}}
+                        </a>
                     </nav>
                 </div>
 

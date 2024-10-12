@@ -126,6 +126,7 @@
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Article</a>
                     <ul class="dropdown-menu">
                         <li><a href="/poster">Poster</a></li>
+                        <li><a href="/agenda">Agenda</a></li>
                     </ul>
                 </li>
                     <!-- Tambahkan item navigasi lain di sini -->

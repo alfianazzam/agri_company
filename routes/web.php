@@ -9,12 +9,15 @@ use App\Http\Controllers\JumbotronController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\AgendaController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/poster', [LandingController::class, 'poster'])->name('poster');
 Route::get('/poster/{id}', [PosterController::class, 'index'])->name('poster.detail');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/agenda', [LandingController::class, 'agenda'])->name('agenda');
+Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.detail');
 
 // Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 // Route::get('/proyek', [ProjectController::class, 'index'])->name('project');
@@ -67,6 +70,13 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::post('/admin/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
     Route::post('/admin/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
     Route::delete('/admin/gallery/delete/{id}', [GalleryController::class, 'delete'])->name('gallery.delete');
+    
+    // Agenda crud
+    Route::get('/admin/agenda', [AgendaController::class, 'admin'])->name('agenda.admin');
+    Route::get('/admin/agenda/show/{id}', [AgendaController::class, 'show'])->name('agenda.show');
+    Route::post('/admin/agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::post('/admin/agenda/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
+    Route::delete('/admin/agenda/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
 
 
 });

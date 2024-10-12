@@ -17,12 +17,12 @@ class PosterController extends Controller
         return view('page.landing.pages.posters.poster', compact('poster', 'categories')); // Kirimkan poster yang dipilih ke view
     }
     
-public function admin()
-{
-    $posters = Poster::with('user')->get(); // Ambil semua poster dengan relasi user
-    $categories = CategoryPoster::all(); // Ambil semua kategori
-    return view('page.admin.services.posters.index', compact('posters', 'categories')); // Kirimkan variabel posters dan categories ke view
-}
+    public function admin()
+    {
+        $posters = Poster::with('user')->get(); // Ambil semua poster dengan relasi user
+        $categories = CategoryPoster::all(); // Ambil semua kategori
+        return view('page.admin.services.posters.index', compact('posters', 'categories')); // Kirimkan variabel posters dan categories ke view
+    }
 
 
     // Menampilkan poster untuk live preview

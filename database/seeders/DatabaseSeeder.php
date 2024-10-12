@@ -12,5 +12,6 @@ class DatabaseSeeder extends Seeder
     {
         // Call the PostersTableSeeder
         $this->call(CategoriesTableSeeder::class);
+        $this->call(AgendaSeeder::class);
     }
 }
