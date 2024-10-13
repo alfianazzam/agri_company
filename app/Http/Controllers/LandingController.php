@@ -14,7 +14,8 @@ class LandingController extends Controller
     {
         $jumbos = Jumbotron::all();
         $about = AboutUs::first();
-        return view('page.landing.index', compact('jumbos', 'about'));
+        $posters = Poster::with('user')->paginate(8); 
+        return view('page.landing.index', compact('jumbos', 'about', 'posters') );
     }
 
     public function login()
@@ -39,6 +40,12 @@ class LandingController extends Controller
     {
         $agendas = Agenda::orderBy('date', 'desc')->get();
         return view('page.landing.pages.agenda.index', compact('agendas'));
+    }
+
+    public function project()
+    {
+        // $agendas = Agenda::orderBy('date', 'desc')->get();
+        return view('page.landing.pages.project.index');
     }
 
 

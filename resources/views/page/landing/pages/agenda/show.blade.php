@@ -42,7 +42,7 @@
 
                 <!-- Description -->
                 <div class="mb-4">
-                    <p class="lead">{{ $agenda->description }}</p>
+                    <p class="lead">{!! $agenda->description !!}</p>
                 </div>
 
                 <!-- Back Button -->

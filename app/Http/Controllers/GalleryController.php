@@ -24,8 +24,7 @@ class GalleryController extends Controller
         $categories = CategoryGallery::all();
         return view('page.admin.services.gallery.index', compact('galleries', 'categories'));
     }
-
-        // Menampilkan poster untuk live preview
+    
     public function show()
     {
         $galleries = Gallery::with('category')->get(); // Ambil data galeri dengan kategori

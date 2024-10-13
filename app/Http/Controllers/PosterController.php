@@ -14,7 +14,7 @@ class PosterController extends Controller
         // Ambil poster berdasarkan ID dengan relasi user
         $poster = Poster::with('user', 'category')->findOrFail($id); // Menggunakan findOrFail untuk mendapatkan poster atau throw 404 jika tidak ada
         $categories = CategoryPoster::all(); // Ambil semua kategori
-        return view('page.landing.pages.posters.poster', compact('poster', 'categories')); // Kirimkan poster yang dipilih ke view
+        return view('page.landing.pages.posters.show', compact('poster', 'categories')); // Kirimkan poster yang dipilih ke view
     }
     
     public function admin()
@@ -30,7 +30,7 @@ class PosterController extends Controller
     {
         $poster = Poster::with('user', 'category')->findOrFail($id); // Mengambil kategori juga
         $categories = CategoryPoster::all(); // Ambil semua kategori
-        return view('page.landing.pages.posters.poster', [
+        return view('page.landing.pages.posters.show', [
             'categories' => $categories,
             'poster' => $poster, 
             'showHeader' => false, 

@@ -10,6 +10,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\CompanyController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
@@ -18,6 +19,8 @@ Route::get('/poster/{id}', [PosterController::class, 'index'])->name('poster.det
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/agenda', [LandingController::class, 'agenda'])->name('agenda');
 Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.detail');
+Route::get('/about', [AboutController::class, 'about'])->name('about');
+Route::get('/project', [LandingController::class, 'project'])->name('project');
 
 // Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 // Route::get('/proyek', [ProjectController::class, 'index'])->name('project');
@@ -78,7 +81,8 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::post('/admin/agenda/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
     Route::delete('/admin/agenda/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
 
-
+    Route::get('admin/company', [CompanyController::class, 'index'])->name('company.index');
+    Route::put('admin/company', [CompanyController::class, 'update'])->name('company.update');
 });
 
 

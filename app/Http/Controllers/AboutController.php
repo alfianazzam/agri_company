@@ -15,6 +15,13 @@ class AboutController extends Controller
         return view('page.admin.pages.about.index', compact('about'));
     }
 
+    // Menampilkan halaman utama admin
+    public function about()
+    {
+        $about = AboutUs::first(); // Ambil satu data About Us
+        return view('page.landing.pages.about.index', compact('about')); 
+    }
+
     public function show()
     {
         $about = AboutUs::first(); // Ambil satu data About Us
