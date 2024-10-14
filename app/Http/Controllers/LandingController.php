@@ -7,6 +7,7 @@ use App\Models\Jumbotron;
 use App\Models\AboutUs;
 use App\Models\Poster;
 use App\Models\Agenda;
+use App\Models\Project;
 
 class LandingController extends Controller
 {
@@ -44,9 +45,7 @@ class LandingController extends Controller
 
     public function project()
     {
-        // $agendas = Agenda::orderBy('date', 'desc')->get();
-        return view('page.landing.pages.project.index');
+        return view('page.landing.pages.project.show');
     }
-
 
 }

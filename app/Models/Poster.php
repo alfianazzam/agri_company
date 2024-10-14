@@ -9,7 +9,7 @@ class Poster extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'img_url', 'user_id', 'category_id']; // Tambahkan category_id di sini
+    protected $fillable = ['title', 'content', 'img_url', 'user_id', 'category_id'];
 
     // Relasi many-to-one ke User
     public function user()
@@ -20,6 +20,6 @@ class Poster extends Model
     // Relasi many-to-one ke Category
     public function category()
     {
-        return $this->belongsTo(CategoryPoster::class); // Pastikan ada relasi ke model Category
+        return $this->belongsTo(CategoryPoster::class);
     }
 }

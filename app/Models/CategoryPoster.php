@@ -10,11 +10,11 @@ class CategoryPoster extends Model
     use HasFactory;
 
     protected $table = 'category_poster'; // Nama tabel baru
-    protected $fillable = ['name', 'description', 'slug', 'tags']; // Tambahkan properti yang sesuai
+    protected $fillable = ['name', 'description', 'slug', 'tags']; // Properti yang sesuai
 
     // Relasi many-to-many ke Poster
     public function posters()
     {
-        return $this->belongsToMany(Poster::class, 'category_poster'); 
+        return $this->hasMany(Poster::class); 
     }
 }

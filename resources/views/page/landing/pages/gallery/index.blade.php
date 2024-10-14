@@ -22,7 +22,7 @@
                         <li><a class="current wow fadeInUp" href="#" data-filter="*">All</a></li>
                         @foreach($categories as $category)
                             <li>
-                                <a class="wow fadeInUp" href="#" data-filter=".{{ $category->name }}" data-wow-delay="0.2s">
+                                <a class="wow fadeInUp" href="#" data-filter=".{{ Str::slug($category->name, '-') }}" data-wow-delay="0.2s">
                                     {{ $category->name }}
                                 </a>
                             </li>
@@ -34,7 +34,7 @@
             <!-- Gallery Items Section -->
             <ul class="works-grid works-grid-gut works-grid-3 works-hover-d" id="works-grid">
                 @foreach($galleries as $gallery)
-                    <li class="work-item {{ $gallery->category->name }}">
+                    <li class="work-item {{ Str::slug($gallery->category->name, '-') }}">
                         <div class="gallery-item">
                             <div class="gallery-image">
                                 <a class="gallery" href="{{ asset('storage/' . $gallery->img_url) }}" title="Desc: {{ $gallery->description }}">

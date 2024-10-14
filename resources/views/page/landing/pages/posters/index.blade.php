@@ -23,7 +23,13 @@
                         </div>
                     </div>
                     <div class="post-entry">
-                        <p>{!! Str::limit($poster->content, 100) !!}</p>
+                        @if($poster->content)
+                            <!-- Batasi konten maksimal 100 kata -->
+                            <p>{{ Str::limit(strip_tags($poster->content), 100) }}</p>
+                        @else
+                            <!-- Jika konten kosong, beri ruang kosong agar tata letak tetap rapi -->
+                            <p>No content available.</p>
+                        @endif
                     </div>
                     <div class="post-more">
                         <!-- Link 'Read more' ke halaman detail poster -->

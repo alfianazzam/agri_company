@@ -27,4 +27,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Poster::class);
     }
+
+    // Relasi one-to-many ke Project
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }

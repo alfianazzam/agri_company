@@ -22,7 +22,7 @@ class Gallery extends Model
     // Relasi ke kategori
     public function category()
     {
-        return $this->belongsTo(CategoryGallery::class);
+        return $this->belongsTo(CategoryGallery::class, 'category_id');
     }
 
     // Relasi ke user (jika ada)

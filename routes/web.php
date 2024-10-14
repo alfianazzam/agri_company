@@ -11,6 +11,7 @@ use App\Http\Controllers\PosterController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProjectController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
@@ -21,6 +22,7 @@ Route::get('/agenda', [LandingController::class, 'agenda'])->name('agenda');
 Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.detail');
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::get('/project', [LandingController::class, 'project'])->name('project');
+Route::get('/project/{id}', [ProjectController::class, 'project'])->name('project.detail');
 
 // Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 // Route::get('/proyek', [ProjectController::class, 'index'])->name('project');
@@ -44,7 +46,7 @@ Route::middleware(['guest'])->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute yang memerlukan akses admin
-Route::middleware(['checkAuth'])->group(function () {
+Route::middleware(['checkAuth'])->group(function () {   
     Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
 
     // Jumbotron crud
@@ -80,6 +82,13 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::post('/admin/agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
     Route::post('/admin/agenda/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
     Route::delete('/admin/agenda/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
+
+    // Project crud
+    Route::get('/admin/project', [ProjectController::class, 'index'])->name('project.admin');
+    Route::get('/admin/project/show/{id}', [ProjectController::class, 'show'])->name('project.show');
+    Route::post('/admin/project/store', [ProjectController::class, 'store'])->name('project.store');
+    Route::post('/admin/project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
+    Route::delete('/admin/project/delete/{id}', [ProjectController::class, 'delete'])->name('project.delete');
 
     Route::get('admin/company', [CompanyController::class, 'index'])->name('company.index');
     Route::put('admin/company', [CompanyController::class, 'update'])->name('company.update');

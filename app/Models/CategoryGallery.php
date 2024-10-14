@@ -21,4 +21,11 @@ class CategoryGallery extends Model
     {
         return $this->hasMany(Gallery::class);
     }
+
+    // Relasi one-to-many ke Project
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }

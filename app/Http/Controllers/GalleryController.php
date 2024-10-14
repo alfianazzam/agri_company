@@ -13,6 +13,9 @@ class GalleryController extends Controller
     {
         $galleries = Gallery::with('category')->get(); // Ambil data galeri dengan kategori
         $categories = CategoryGallery::all(); // Ambil semua kategori
+
+           // Use dd() to debug the data
+    // dd($galleries, $categories);
         return view('page.landing.pages.gallery.index', compact('galleries', 'categories'));
     }
 
@@ -24,7 +27,7 @@ class GalleryController extends Controller
         $categories = CategoryGallery::all();
         return view('page.admin.services.gallery.index', compact('galleries', 'categories'));
     }
-    
+
     public function show()
     {
         $galleries = Gallery::with('category')->get(); // Ambil data galeri dengan kategori
@@ -35,6 +38,7 @@ class GalleryController extends Controller
             'showHeader' => false, 
             'showFooter' => false
         ]);
+        
     }
 
     // Menyimpan atau mengupdate gallery

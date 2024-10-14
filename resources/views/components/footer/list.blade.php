@@ -24,7 +24,7 @@
              </div>
              <div class="col-sm-3">
                  <div class="widget">
-                     <h5 class="widget-title font-alt">Blog Categories</h5>
+                     <h5 class="widget-title font-alt">Poster Categories</h5>
                      <ul class="icon-list">
                          <li><a href="#">Photography - 7</a></li>
                          <li><a href="#">Web Design - 3</a></li>

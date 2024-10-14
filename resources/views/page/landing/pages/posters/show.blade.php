@@ -14,73 +14,21 @@
                     <div class="post-header font-alt">
                         <h1 class="post-title">{{ $poster->title }}</h1>
                         <div class="post-meta">
-                            By <a href="#">{{ $poster->user->name }}</a> | {{ $poster->created_at->format('d M Y, H:i') }} | 3 Comments | 
+                            By <a href="#">{{ $poster->user->name }}</a> | {{ $poster->created_at->format('d M Y, H:i') }} |
                             <a href="#">{{ $poster->category->name ?? 'No category assigned' }}</a>
                         </div>
                     </div>
                     <div class="post-entry">
                         <p>{!! $poster->content !!}</p>
                     </div>
-                </div>
-
-                <div class="comments mt-4">
-                    <h4 class="comment-title font-alt">There are 3 comments</h4>
-                    <div class="comment clearfix">
-                        <div class="comment-avatar">
-                            <img src="{{ asset('assets/images/team-3.jpg') }}" alt="avatar" class="rounded-circle">
-                        </div>
-                        <div class="comment-content">
-                            <div class="comment-author font-alt"><a href="#">John Doe</a></div>
-                            <div class="comment-body">
-                                <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
-                            </div>
-                            <div class="comment-meta font-alt">Today, 14:55 - <a href="#">Reply</a></div>
-                        </div>
+                    <div class="post-tags">
+                        <h5>Tags:</h5>
+                        <ul>
+                            @foreach(explode(',', $poster->category->tags) as $tag)
+                                <li>{{ trim($tag) }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-
-                    <div class="comment clearfix">
-                        <div class="comment-avatar">
-                            <img src="{{ asset('assets/images/team-3.jpg') }}" alt="avatar" class="rounded-circle">
-                        </div>
-                        <div class="comment-content">
-                            <div class="comment-author font-alt"><a href="#">Mark Stone</a></div>
-                            <div class="comment-body">
-                                <p>Europe uses the same vocabulary. The European languages are members of the same family. Their separate existence is a myth.</p>
-                            </div>
-                            <div class="comment-meta font-alt">Today, 15:34 - <a href="#">Reply</a></div>
-                        </div>
-                    </div>
-
-                    <div class="comment clearfix">
-                        <div class="comment-avatar">
-                            <img src="{{ asset('assets/images/team-3.jpg') }}" alt="avatar" class="rounded-circle">
-                        </div>
-                        <div class="comment-content">
-                            <div class="comment-author font-alt"><a href="#">Andy</a></div>
-                            <div class="comment-body">
-                                <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
-                            </div>
-                            <div class="comment-meta font-alt">Today, 14:59 - <a href="#">Reply</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-form mt-4">
-                    <h4 class="comment-form-title font-alt">Add Your Comment</h4>
-                    <form method="post">
-                        <div class="form-group">
-                            <label class="sr-only" for="name">Name</label>
-                            <input class="form-control" id="name" type="text" name="name" placeholder="Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="email">E-mail</label>
-                            <input class="form-control" id="email" type="email" name="email" placeholder="E-mail" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Comment" required></textarea>
-                        </div>
-                        <button class="btn btn-round btn-d" type="submit">Post Comment</button>
-                    </form>
                 </div>
             </div>
 
@@ -96,80 +44,13 @@
                 <div class="widget">
                     <h5 class="widget-title font-alt">Article Categories</h5>
                     <ul class="icon-list">
-                        <li><a href="#">Photography - 7</a></li>
-                        <li><a href="#">Web Design - 3</a></li>
-                        <li><a href="#">Illustration - 12</a></li>
-                        <li><a href="#">Marketing - 1</a></li>
-                        <li><a href="#">WordPress - 16</a></li>
-                    </ul>
-                </div>
-                <div class="widget">
-                    <h5 class="widget-title font-alt">Popular Posts</h5>
-                    <ul class="widget-posts">
-                        <li class="clearfix">
-                            <div class="widget-posts-image"><a href="#"><img src="{{ asset('assets/images/rp-1.jpg') }}" alt="Post Thumbnail"></a></div>
-                            <div class="widget-posts-body">
-                                <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
-                                <div class="widget-posts-meta">23 January</div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="widget-posts-image"><a href="#"><img src="{{ asset('assets/images/rp-1.jpg') }}" alt="Post Thumbnail"></a></div>
-                            <div class="widget-posts-body">
-                                <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a></div>
-                                <div class="widget-posts-meta">15 February</div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="widget-posts-image"><a href="#"><img src="{{ asset('assets/images/rp-1.jpg') }}" alt="Post Thumbnail"></a></div>
-                            <div class="widget-posts-body">
-                                <div class="widget-posts-title"><a href="#">Eco Bag Mockup</a></div>
-                                <div class="widget-posts-meta">21 February</div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="widget-posts-image"><a href="#"><img src="{{ asset('assets/images/rp-1.jpg') }}" alt="Post Thumbnail"></a></div>
-                            <div class="widget-posts-body">
-                                <div class="widget-posts-title"><a href="#">Bottle Mockup</a></div>
-                                <div class="widget-posts-meta">2 March</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="widget">
-                    <h5 class="widget-title font-alt">Tags</h5>
-                    <div class="tags font-serif">
-                        <a href="#" rel="tag">Blog</a>
-                        <a href="#" rel="tag">Photo</a>
-                        <a href="#" rel="tag">Video</a>
-                        <a href="#" rel="tag">Image</a>
-                        <a href="#" rel="tag">Minimal</a>
-                        <a href="#" rel="tag">Post</a>
-                        <a href="#" rel="tag">Theme</a>
-                        <a href="#" rel="tag">Ideas</a>
-                        <a href="#" rel="tag">Tags</a>
-                        <a href="#" rel="tag">Bootstrap</a>
-                        <a href="#" rel="tag">Popular</a>
-                        <a href="#" rel="tag">English</a>
-                    </div>
-                </div>
-                <div class="widget">
-                    <h5 class="widget-title font-alt">Text</h5>
-                    <p>The languages only differ in their grammar, their pronunciation, and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</p>
-                </div>
-                <div class="widget">
-                    <h5 class="widget-title font-alt">Recent Comments</h5>
-                    <ul class="icon-list">
-                        <li>Maria on <a href="#">Designer Desk Essentials</a></li>
-                        <li>John on <a href="#">Realistic Business Card Mockup</a></li>
-                        <li>Andy on <a href="#">Eco Bag Mockup</a></li>
-                        <li>Jack on <a href="#">Bottle Mockup</a></li>
-                        <li>Mark on <a href="#">Our Trip to the Alps</a></li>
+                        @foreach($categories as $category)
+                            <li><a href="#">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 @endsection
