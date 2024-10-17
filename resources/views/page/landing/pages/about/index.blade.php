@@ -4,67 +4,62 @@
 
 @section('content')
 <div class="main">
-        <section class="module bg-dark-60 about-page-header" data-background="assets/images/about_bg.jpg" style="background-image: url(&quot;assets/images/about_bg.jpg&quot;);">
+        <section class="module bg-dark-60 about-page-header" data-background="{{ asset('storage/' . $about->image_url) }}" style="background-image: url('{{ asset('storage/' . $about->image_url) }}');">
           <div class="container">
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">About</h2>
-                <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+                <h2 class="module-title font-alt">{{ $about->title }}</h2>
+                <div class="module-subtitle font-serif">{{ $about->subtitle }}</div>
               </div>
             </div>
           </div>
         </section>
+
         <section class="module">
           <div class="container">
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">Our skills</h2>
-                <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+                <h2 class="module-title font-alt">Our Expertise</h2>
+                <div class="module-subtitle font-serif">From seed to harvest, our team provides leading-edge solutions to maximize yields and improve sustainability.</div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-sm-6">
-                <h6 class="font-alt"><span class="icon-tools-2"></span> Development
-                </h6>
+                <h6 class="font-alt"><span class="icon-leaf"></span> Sustainable Farming</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="font-alt" style="opacity: 1;">60</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="85" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"><span class="font-alt" style="opacity: 1;">85%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-strategy"></span> Branding
-                </h6>
+                <h6 class="font-alt"><span class="icon-tree"></span> Agroforestry</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="font-alt" style="opacity: 1;">80</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="70" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="font-alt" style="opacity: 1;">70%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-target"></span> Marketing
-                </h6>
+                <h6 class="font-alt"><span class="icon-harvest"></span> Crop Management</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="50" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="font-alt" style="opacity: 1;">50</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="font-alt" style="opacity: 1;">90%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-camera"></span> Photography
-                </h6>
+                <h6 class="font-alt"><span class="icon-water"></span> Irrigation Systems</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="font-alt" style="opacity: 1;">90</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"><span class="font-alt" style="opacity: 1;">75%</span></div>
                 </div>
               </div>
+
               <div class="col-sm-6">
-                <h6 class="font-alt"><span class="icon-tools-2"></span> Development
-                </h6>
+                <h6 class="font-alt"><span class="icon-leaf"></span> Sustainable Farming</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="60" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="font-alt" style="opacity: 1;">60</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="85" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"><span class="font-alt" style="opacity: 1;">85%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-strategy"></span> Branding
-                </h6>
+                <h6 class="font-alt"><span class="icon-tree"></span> Agroforestry</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="80" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="font-alt" style="opacity: 1;">80</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="70" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"><span class="font-alt" style="opacity: 1;">70%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-target"></span> Marketing
-                </h6>
+                <h6 class="font-alt"><span class="icon-harvest"></span> Crop Management</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="50" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="font-alt" style="opacity: 1;">50</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="font-alt" style="opacity: 1;">90%</span></div>
                 </div>
-                <h6 class="font-alt"><span class="icon-camera"></span> Photography
-                </h6>
+                <h6 class="font-alt"><span class="icon-water"></span> Irrigation Systems</h6>
                 <div class="progress">
-                  <div class="progress-bar pb-dark" aria-valuenow="90" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><span class="font-alt" style="opacity: 1;">90</span></div>
+                  <div class="progress-bar pb-dark" aria-valuenow="75" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"><span class="font-alt" style="opacity: 1;">75%</span></div>
                 </div>
               </div>
             </div>
@@ -81,5 +76,5 @@
 
         @include('components.contact.index')
 
-      </div>
+</div>
 @endsection

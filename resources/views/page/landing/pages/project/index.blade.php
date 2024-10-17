@@ -75,18 +75,15 @@
                         <h5 class="work-details-title font-alt">Project Details</h5>
                         <ul>
                             <li><strong>Client: </strong><span class="font-serif">{{ $project->client ?? 'Not Available' }}</span></li>
-                            <li><strong>Date: </strong><span class="font-serif">{{ $project->date ?? 'Not Available' }}</span></li>
+                            <li><strong>Date: </strong><span class="font-serif">{{ $project->date ? $project->date->translatedFormat('d, F Y') : 'Not Available' }}</span></li>
                             <li><strong>Location: </strong><span class="font-serif">{{ $project->location ?? 'Not Available' }}</span></li>
                             <li><strong>Category: </strong><span class="font-serif">{{ $project->category->name ?? 'Not Available' }}</span></li>
                             <li><strong>Website: </strong><span class="font-serif"><a href="{{ $project->website ?? '#' }}" target="_blank">{{ $project->website ?? 'Not Available' }}</a></span></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="col-sm-8">
                     <p>{!! $project->text_content ?? 'Description not available.' !!}</p>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4">
-                    <p>Through collaboration and innovative solutions, this project has had a significant impact on improving agricultural processes, increasing efficiency, and promoting sustainability.</p>
                 </div>
             </div>
         </div>

@@ -1,4 +1,6 @@
-        
+@extends('layouts.app')
+
+@section('content')
         @foreach ($testimonials as $testimonial )    
         <section class="module bg-dark-60 pt-0 pb-0 parallax-bg testimonial" data-background="{{ asset('storage/' . $testimonial->jumbotron_image) }}">
             <div class="testimonials-slider pt-140 pb-140">
@@ -32,3 +34,5 @@
             </div>
         </section>
         @endforeach
+
+@endsection

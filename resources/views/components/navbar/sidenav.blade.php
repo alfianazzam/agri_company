@@ -23,17 +23,25 @@
                 <div class="collapse {{ request()->is('admin/jumbotron') || request()->is('admin/about') || request()->is('admin/ourworks') ? 'show' : '' }}" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link {{ request()->is('admin/jumbotron') ? 'active' : '' }}" href="{{ route('jumbotron') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-images"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-image"></i></div> <!-- Ganti dengan ikon gambar -->
                             Jumbotron
                         </a>
                         <a class="nav-link {{ request()->is('admin/about') ? 'active' : '' }}" href="{{ route('about') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-info-circle me-1"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div> <!-- Ganti dengan ikon kartu alamat -->
                             About
                         </a>
-                        {{-- <a class="nav-link {{ request()->is('admin/ourworks') ? 'active' : '' }}" href="{{ route('ouworks') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-briefcase me-1"></i></div>
-                            Our Works
-                        </a> --}}
+                        <a class="nav-link {{ request()->is('admin/feature') ? 'active' : '' }}" href="{{ route('feature.admin') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-star"></i></div> <!-- Ganti dengan ikon bintang -->
+                            Features
+                        </a>
+                        <a class="nav-link {{ request()->is('admin/testimonial') ? 'active' : '' }}" href="{{ route('testimonial.admin') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div> <!-- Ganti dengan ikon komentar -->
+                            Testimonial
+                        </a>
+                        <a class="nav-link {{ request()->is('admin/team-member') ? 'active' : '' }}" href="{{ route('team.admin') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div> <!-- Ganti dengan ikon pengguna -->
+                            Team Members
+                        </a>
                     </nav>
                 </div>
 
@@ -50,12 +58,16 @@
                             Poster
                         </a>
                         <a class="nav-link {{ request()->is('gallery.admin') ? 'active' : '' }}" href="{{ route('gallery.admin') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-image me-1"></i></div> <!-- Ikon gambar untuk Galeri -->
+                            <div class="sb-nav-link-icon"><i class="fas fa-image me-1"></i></div> 
                             Gallery
                         </a>
                         <a class="nav-link {{ request()->is('agenda.admin') ? 'active' : '' }}" href="{{ route('agenda.admin') }}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt me-1"></i></div> <!-- Ganti ikon dengan kalender untuk Agenda -->
+                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt me-1"></i></div> 
                             Agenda
+                        </a>
+                        <a class="nav-link {{ request()->is('project.admin') ? 'active' : '' }}" href="{{ route('project.admin') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-briefcase me-1"></i></div>
+                            Project
                         </a>
                     </nav>
                 </div>

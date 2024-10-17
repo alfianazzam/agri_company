@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <section class="module" id="team">
     <div class="container">
         <div class="row">
@@ -38,3 +42,5 @@
         </div>
     </div>
 </section>
+
+@endsection

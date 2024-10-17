@@ -12,9 +12,14 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\TeamMemberController;
+use App\Http\Controllers\SearchController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/poster', [LandingController::class, 'poster'])->name('poster');
 Route::get('/poster/{id}', [PosterController::class, 'index'])->name('poster.detail');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
@@ -89,6 +94,28 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::post('/admin/project/store', [ProjectController::class, 'store'])->name('project.store');
     Route::post('/admin/project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
     Route::delete('/admin/project/delete/{id}', [ProjectController::class, 'delete'])->name('project.delete');
+
+    // Feature CRUD routes
+    Route::get('/admin/feature', [FeatureController::class, 'index'])->name('feature.admin');
+    Route::get('/admin/feature/icons', [FeatureController::class, 'icons'])->name('feature.icons');
+    Route::get('/admin/feature/show', [FeatureController::class, 'show'])->name('feature.show');
+    Route::post('/admin/feature/store', [FeatureController::class, 'store'])->name('feature.store');
+    Route::post('/admin/feature/update/{id}', [FeatureController::class, 'update'])->name('feature.update');
+    Route::delete('/admin/feature/delete/{id}', [FeatureController::class, 'delete'])->name('feature.delete');
+
+    // Testimonial CRUD routes
+    Route::get('/admin/testimonial', [TestimonialController::class, 'index'])->name('testimonial.admin');
+    Route::get('/admin/testimonial/show', [TestimonialController::class, 'show'])->name('testimonial.show');
+    Route::post('/admin/testimonial/store', [TestimonialController::class, 'store'])->name('testimonial.store');
+    Route::post('/admin/testimonial/update/{id}', [TestimonialController::class, 'update'])->name('testimonial.update');
+    Route::delete('/admin/testimonial/delete/{id}', [TestimonialController::class, 'delete'])->name('testimonial.delete');
+
+    // TeamMember CRUD routes
+    Route::get('/admin/team-member', [TeamMemberController::class, 'index'])->name('team.admin');
+    Route::get('/admin/team-member/show', [TeamMemberController::class, 'show'])->name('team.show');
+    Route::post('/admin/team-member/store', [TeamMemberController::class, 'store'])->name('team.store');
+    Route::post('/admin/team-member/update/{id}', [TeamMemberController::class, 'update'])->name('team.update');
+    Route::delete('/admin/team-member/delete/{id}', [TeamMemberController::class, 'delete'])->name('team.delete');
 
     Route::get('admin/company', [CompanyController::class, 'index'])->name('company.index');
     Route::put('admin/company', [CompanyController::class, 'update'])->name('company.update');

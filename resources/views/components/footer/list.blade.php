@@ -12,52 +12,68 @@
              </div>
              <div class="col-sm-3">
                  <div class="widget">
-                     <h5 class="widget-title font-alt">Recent Comments</h5>
+                     <h5 class="widget-title font-alt">Recent Agenda</h5>
+                    @php
+                        $agendas = \App\Models\Agenda::all();
+                    @endphp
+
                      <ul class="icon-list">
-                         <li>Maria on <a href="#">Designer Desk Essentials</a></li>
-                         <li>John on <a href="#">Realistic Business Card Mockup</a></li>
-                         <li>Andy on <a href="#">Eco bag Mockup</a></li>
-                         <li>Jack on <a href="#">Bottle Mockup</a></li>
-                         <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                        @foreach ($agendas as $agenda)
+
+                        <li>{{ $agenda->location }} <a href="{{ route('poster.detail', $agenda->id) }}">{{ $agenda->title }}</a></li>
+                            
+                        @endforeach
                      </ul>
                  </div>
              </div>
              <div class="col-sm-3">
-                 <div class="widget">
-                     <h5 class="widget-title font-alt">Poster Categories</h5>
-                     <ul class="icon-list">
-                         <li><a href="#">Photography - 7</a></li>
-                         <li><a href="#">Web Design - 3</a></li>
-                         <li><a href="#">Illustration - 12</a></li>
-                         <li><a href="#">Marketing - 1</a></li>
-                         <li><a href="#">Wordpress - 16</a></li>
-                     </ul>
-                 </div>
+<div class="widget">
+    <h5 class="widget-title font-alt">Poster Categories</h5>
+    <ul class="icon-list">
+        @php
+        // Mengambil kategori dan menghitung jumlah poster untuk setiap kategori
+        $categories = \App\Models\CategoryPoster::withCount('posters')->get();
+        @endphp
+
+        @foreach ($categories as $category)
+        <li>
+            <a href="#">
+                {{ $category->name }} - {{ $category->posters_count }}
+            </a>
+        </li>
+        @endforeach
+    </ul>
+</div>
+
+
              </div>
              <div class="col-sm-3">
                  <div class="widget">
-                     <h5 class="widget-title font-alt">Popular Posts</h5>
-                     <ul class="widget-posts">
-                         <li class="clearfix">
-                             <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-1.jpg"
-                                         alt="Post Thumbnail" /></a></div>
-                             <div class="widget-posts-body">
-                                 <div class="widget-posts-title"><a href="#">Designer Desk
-                                         Essentials</a></div>
-                                 <div class="widget-posts-meta">23 january</div>
-                             </div>
-                         </li>
-                         <li class="clearfix">
-                             <div class="widget-posts-image"><a href="#"><img src="assets/images/rp-2.jpg"
-                                         alt="Post Thumbnail" /></a></div>
-                             <div class="widget-posts-body">
-                                 <div class="widget-posts-title"><a href="#">Realistic Business Card
-                                         Mockup</a></div>
-                                 <div class="widget-posts-meta">15 February</div>
-                             </div>
-                         </li>
-                     </ul>
-                 </div>
+    <h5 class="widget-title font-alt">Updated Posters</h5>
+    <ul class="widget-posts">
+        @php
+        // Mengambil poster terbaru
+        $recentPosters = \App\Models\Poster::orderBy('created_at', 'desc')->take(3)->get();
+        @endphp
+
+        @foreach ($recentPosters as $poster)
+        <li class="clearfix">
+            <div class="widget-posts-image">
+                <a href="{{ route('poster.show', $poster->id) }}">
+                    <img src="{{ asset('storage/' . $poster->img_url) }}" alt="{{ $poster->title }} Thumbnail" />
+                </a>
+            </div>
+            <div class="widget-posts-body">
+                <div class="widget-posts-title">
+                    <a href="{{ route('poster.show', $poster->id) }}">{{ $poster->title }}</a>
+                </div>
+                <div class="widget-posts-meta">{{ $poster->created_at->format('d F') }}</div>
+            </div>
+        </li>
+        @endforeach
+    </ul>
+</div>
+
              </div>
          </div>
      </div>

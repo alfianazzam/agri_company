@@ -22,7 +22,7 @@
 
         <hr class="divider-w">
 
-        @include('components.ask.index')
+        {{-- @include('components.ask.index') --}}
 
         @include('components.contact.index')
 

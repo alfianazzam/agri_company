@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AboutUs;
+use App\Models\TeamMember;
+use App\Models\Feature;
 use Illuminate\Support\Str;
 
 class AboutController extends Controller
@@ -12,14 +14,24 @@ class AboutController extends Controller
     public function index()
     {
         $about = AboutUs::first(); // Ambil satu data About Us
-        return view('page.admin.pages.about.index', compact('about'));
+        $teamMembers = TeamMember::all();
+        return view('page.admin.pages.about.index', [
+            'about' => $about,
+            'teamMembers' => $teamMembers
+        ]);
     }
 
     // Menampilkan halaman utama admin
     public function about()
     {
         $about = AboutUs::first(); // Ambil satu data About Us
-        return view('page.landing.pages.about.index', compact('about')); 
+        $teamMembers = TeamMember::all();
+        $feature = Feature::all();
+        return view('page.landing.pages.about.index', [
+            'about' => $about,
+            'teamMembers' => $teamMembers,
+            'feature' => $feature
+        ]);
     }
 
     public function show()

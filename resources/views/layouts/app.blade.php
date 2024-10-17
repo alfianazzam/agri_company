@@ -47,8 +47,10 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link id="color-scheme" href="{{ asset('assets/css/colors/default.css') }}" rel="stylesheet">
 
+
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">

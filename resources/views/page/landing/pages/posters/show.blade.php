@@ -21,14 +21,24 @@
                     <div class="post-entry">
                         <p>{!! $poster->content !!}</p>
                     </div>
+                    
+                    <!-- Improved Tags Section -->
                     <div class="post-tags">
                         <h5>Tags:</h5>
-                        <ul>
-                            @foreach(explode(',', $poster->category->tags) as $tag)
-                                <li>{{ trim($tag) }}</li>
-                            @endforeach
+                        <ul class="list-inline">
+                            @if($poster->category && $poster->category->tags)
+                                @foreach(json_decode($poster->category->tags) as $tag)
+                                    <li class="list-inline-item">
+                                        <a href="https://www.google.com/search?q={{ urlencode(trim($tag)) }}" target="_blank" class="badge badge-primary">
+                                            {{ trim($tag) }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li>No tags available</li>
+                            @endif
                         </ul>
-                    </div>
+                    </div>  
                 </div>
             </div>
 

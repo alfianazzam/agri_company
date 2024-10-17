@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <section class="module">
             <div class="container">
                 <div class="row multi-columns-row">
@@ -13,3 +17,5 @@
                 </div>
             </div>
         </section>
+
+@endsection

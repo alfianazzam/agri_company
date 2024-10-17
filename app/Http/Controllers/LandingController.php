@@ -8,6 +8,9 @@ use App\Models\AboutUs;
 use App\Models\Poster;
 use App\Models\Agenda;
 use App\Models\Project;
+use App\Models\Feature;
+use App\Models\Testimonial;
+use App\Models\TeamMember;
 
 class LandingController extends Controller
 {
@@ -16,7 +19,10 @@ class LandingController extends Controller
         $jumbos = Jumbotron::all();
         $about = AboutUs::first();
         $posters = Poster::with('user')->paginate(8); 
-        return view('page.landing.index', compact('jumbos', 'about', 'posters') );
+        $feature = Feature::all(); 
+        $testimonials = Testimonial::all(); 
+        $teamMembers = TeamMember::all(); 
+        return view('page.landing.index', compact('jumbos', 'about', 'posters', 'feature', 'testimonials', 'teamMembers') );
     }
 
     public function login()

@@ -15,6 +15,7 @@ class CategoryPoster extends Model
     // Relasi many-to-many ke Poster
     public function posters()
     {
-        return $this->hasMany(Poster::class); 
+        return $this->hasMany(Poster::class, 'category_id'); // Jelaskan bahwa kolom foreign key adalah category_id
     }
+
 }

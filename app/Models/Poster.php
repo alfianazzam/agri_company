@@ -20,6 +20,7 @@ class Poster extends Model
     // Relasi many-to-one ke Category
     public function category()
     {
-        return $this->belongsTo(CategoryPoster::class);
+        return $this->belongsTo(CategoryPoster::class, 'category_id');
     }
+
 }
