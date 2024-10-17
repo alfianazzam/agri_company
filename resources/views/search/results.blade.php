@@ -37,6 +37,50 @@
                 @endforeach
             </ul>
         @endif
+        
+        <h2>Testimonials</h2>
+        @if($testimonials->isEmpty())
+            <p>Tidak ada hasil untuk Testimonials.</p>
+        @else
+            <ul>
+                @foreach($testimonials as $testimonial)
+                    <li>"{{ $testimonial->quote }}" - <strong>{{ $testimonial->writer }}</strong></li>
+                @endforeach
+            </ul>
+        @endif
+    
+        <h2>Team Members</h2>
+        @if($teamMembers->isEmpty())
+            <p>Tidak ada hasil untuk Team Members.</p>
+        @else
+            <ul>
+                @foreach($teamMembers as $teamMember)
+                    <li>{{ $teamMember->name }} - {{ $teamMember->role }}</li>
+                @endforeach
+            </ul>
+        @endif
+    
+        <h2>Jumbotrons</h2>
+        @if($jumbotrons->isEmpty())
+            <p>Tidak ada hasil untuk Jumbotrons.</p>
+        @else
+            <ul>
+                @foreach($jumbotrons as $jumbotron)
+                    <li>{{ $jumbotron->title }} - {{ $jumbotron->subtitle }}</li>
+                @endforeach
+            </ul>
+        @endif
+    
+        <h2>Companies</h2>
+        @if($companies->isEmpty())
+            <p>Tidak ada hasil untuk Companies.</p>
+        @else
+            <ul>
+                @foreach($companies as $company)
+                    <li>{{ $company->name }}</li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 </div>
 @endsection
