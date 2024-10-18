@@ -20,20 +20,20 @@
                 <!-- Date, Location, Status -->
                 <ul class="list-unstyled mb-4">
                     <li>
-                        <i class="fas fa-calendar-alt me-2"></i> 
+                        <i class="icon-calendar me-2"></i> 
                         <strong>Date: </strong> {{ \Carbon\Carbon::parse($agenda->date)->format('F j, Y H:i') }}
                     </li>
                     <li>
-                        <i class="fas fa-map-marker-alt me-2"></i> 
+                        <i class="icon-map-pin me-2"></i> 
                         <strong>Location: </strong> {{ $agenda->location }}
                     </li>
                     <li>
-                        <i class="fas fa-info-circle me-2"></i> 
+                        <i class="icon-lightbulb me-2"></i> 
                         <strong>Status: </strong> 
                         <span class="badge 
-                            @if($agenda->status === 'upcoming') badge-warning 
-                            @elseif($agenda->status === 'ongoing') badge-success 
-                            @else badge-secondary 
+                            @if($agenda->status === 'upcoming') alert-warning 
+                            @elseif($agenda->status === 'ongoing') alert-success  
+                            @else alert-info  
                             @endif">
                             {{ ucfirst($agenda->status) }}
                         </span>
@@ -42,12 +42,12 @@
 
                 <!-- Description -->
                 <div class="mb-4">
-                    <p class="lead">{!! $agenda->description !!}</p>
+                    <p>{{ (strip_tags($agenda->description)) }}</p>
                 </div>
 
                 <!-- Back Button -->
                 <a href="{{ route('agenda') }}" class="btn btn-d btn-round">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Agendas
+                    <i class="bi bi-arrow-left me-2"></i>Back to Agendas
                 </a>
             </div>
         </div>

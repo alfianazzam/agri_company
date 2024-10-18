@@ -44,18 +44,10 @@
 
             <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
                 <div class="widget">
-                    <form role="form">
-                        <div class="search-box">
-                            <input class="form-control" type="text" placeholder="Search...">
-                            <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
-                <div class="widget">
                     <h5 class="widget-title font-alt">Article Categories</h5>
                     <ul class="icon-list">
                         @foreach($categories as $category)
-                            <li><a href="#">{{ $category->name }}</a></li>
+                            <li><a href="">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

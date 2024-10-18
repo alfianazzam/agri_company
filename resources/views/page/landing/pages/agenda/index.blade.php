@@ -36,17 +36,24 @@
                             <span class="post-date">{{ \Carbon\Carbon::parse($agenda->date)->format('F j, Y') }}</span>
                             <span class="post-location">{{ $agenda->location }}</span>
                             <span class="post-status badge 
-                                @if($agenda->status === 'upcoming') badge-warning 
-                                @elseif($agenda->status === 'ongoing') badge-success 
-                                @else badge-secondary 
+                                @if($agenda->status === 'upcoming') alert-warning 
+                                @elseif($agenda->status === 'ongoing') alert-success 
+                                @else alert-info 
                                 @endif">
                                 {{ ucfirst($agenda->status) }}
                             </span>
                         </div>
                     </div>
                     <div class="post-entry">
-                        <p>{{ \Illuminate\Support\Str::limit($agenda->description, 100, '...') }}</p>
+                        @if($agenda->description)
+                            <!-- Batasi konten maksimal 100 kata -->
+                            <p>{{ Str::limit(strip_tags($agenda->description), 100) }}</p>
+                        @else
+                            <!-- Jika konten kosong, beri ruang kosong agar tata letak tetap rapi -->
+                            <p>No content available.</p>
+                        @endif
                     </div>
+                    
                     <div class="post-more">
                         <a href="{{ route('agenda.detail', $agenda->id) }}" class="more-link">Read More</a>
                     </div>
@@ -55,11 +62,9 @@
             @endforeach
         </div>
 
-        <!-- Load More Button -->
-        <div class="text-center mt-4">
-            <a href="{{ route('agenda') }}" class="btn btn-d btn-round">
-                View All Events
-            </a>
+        <!-- Pagination -->
+        <div class="pagination font-alt">
+            {{ $agendas->links('vendor.pagination.bootstrap-5') }} <!-- Menggunakan tampilan pagination kustom -->
         </div>
     </div>
 </section>

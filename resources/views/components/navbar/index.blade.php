@@ -7,7 +7,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/') }}">Agro Kreatif</a>
+<a class="navbar-brand" href="{{ url('/') }}" style="display: flex; align-items: center;">
+    <img src="{{ asset('storage/' . $company->logo_url) }}" alt="Logo" style="height: 3rem; margin-right: 1.5rem;">
+    <b>Agro</b> <span style="font-weight: 100; font-size: 2rem;">Kreatif</span>
+</a>
         </div>
         <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">

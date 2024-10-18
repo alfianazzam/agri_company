@@ -16,6 +16,7 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MessageController;
 
 // Rute publik
 Route::get('/', [LandingController::class, 'index'])->name('home');
@@ -24,10 +25,16 @@ Route::get('/poster', [LandingController::class, 'poster'])->name('poster');
 Route::get('/poster/{id}', [PosterController::class, 'index'])->name('poster.detail');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/agenda', [LandingController::class, 'agenda'])->name('agenda');
+Route::get('/agenda/all', [AgendaController::class, 'viewall'])->name('agenda.all');
 Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.detail');
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::get('/project', [LandingController::class, 'project'])->name('project');
 Route::get('/project/{id}', [ProjectController::class, 'project'])->name('project.detail');
+
+
+Route::get('/contact', [MessageController::class, 'create'])->name('contact.create');
+Route::post('/contact', [MessageController::class, 'store']);
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 
 // Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 // Route::get('/proyek', [ProjectController::class, 'index'])->name('project');

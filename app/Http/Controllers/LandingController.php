@@ -43,9 +43,11 @@ class LandingController extends Controller
         return view('page.landing.pages.posters.index', compact('posters')); 
     }
 
+    // Display a list of all agendas on the landing page
     public function agenda()
     {
-        $agendas = Agenda::orderBy('date', 'desc')->get();
+        // Use pagination to get agendas, displaying 6 per page for example
+        $agendas = Agenda::orderBy('date', 'desc')->paginate(6);
         return view('page.landing.pages.agenda.index', compact('agendas'));
     }
 

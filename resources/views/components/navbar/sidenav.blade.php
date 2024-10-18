@@ -7,10 +7,9 @@
                     Back to Home
                 </a>
 
-                <div class="sb-sidenav-menu-heading">Main</div>
                 <a class="nav-link {{ request()->is('/admin') ? 'active' : '' }}" href="/admin">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
+                    <div class="sb-nav-link-icon"><i class="fas fa-inbox"></i></div>
+                    Message Dashboard
                 </a>
 
                 <div class="sb-sidenav-menu-heading">Content Management</div>
@@ -75,17 +74,6 @@
                 <a class="nav-link {{ request()->is('company.index') ? 'active' : '' }}" href="{{ route('company.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-info-circle"></i></div>
                     Configuration
-                </a>
-
-                <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link {{ request()->is('charts.html') ? 'active' : '' }}" href="charts.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Charts
-                </a>
-
-                <a class="nav-link {{ request()->is('tables.html') ? 'active' : '' }}" href="tables.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Tables
                 </a>
             </div>
         </div>

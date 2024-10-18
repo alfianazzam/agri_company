@@ -48,7 +48,14 @@ class AuthController extends Controller
             Auth::login($user);
 
             // Set cookie dengan email pengguna, valid 10 menit
-            return redirect()->route('home')->withCookie(cookie('user_email', $user->email, 10));
+            $cookie = cookie('user_email', $user->email, 10);
+
+            // Cek apakah pengguna adalah admin
+            if ($user->isAdmin()) { // Pastikan Anda memiliki metode isAdmin() di model User
+                return redirect()->route('dashboard')->withCookie($cookie);
+            }
+
+            return redirect()->route('home')->withCookie($cookie);
         }
 
         // Jika pengguna tidak ditemukan atau password salah, hapus cookie 'user_email'

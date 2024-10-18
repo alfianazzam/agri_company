@@ -19,7 +19,7 @@
                         <h2 class="post-title"><a href="{{ route('poster.detail', $poster->id) }}">{{ $poster->title }}</a></h2>
                         <div class="post-meta">
                             By&nbsp;<a href="#">{{ $poster->user->name }}</a>&nbsp;| 
-                            {{ $poster->created_at->format('d M Y, H:i') }} | 3 Comments
+                            {{ $poster->created_at->format('d M Y, H:i') }} 
                         </div>
                     </div>
                     <div class="post-entry">

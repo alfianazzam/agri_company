@@ -8,9 +8,10 @@ use App\Models\Agenda;
 class AgendaController extends Controller
 {
     // Display a list of all agendas on the landing page
-    public function index($id)
+    public function index()
     {
-        $agendas = Agenda::orderBy('date', 'desc')->get();
+        // Use pagination to get agendas, displaying 6 per page for example
+        $agendas = Agenda::orderBy('date', 'desc')->paginate(6);
         return view('page.landing.pages.agenda.index', compact('agendas'));
     }
 
@@ -18,7 +19,7 @@ class AgendaController extends Controller
     public function show($id)
     {
         $agenda = Agenda::findOrFail($id);
-        return view('page.landing.pages.agenda.show', compact('agenda'));
+        return view('page.landing.pages.agenda.show', compact('agenda') );
     }
 
     // Admin view for managing agendas
